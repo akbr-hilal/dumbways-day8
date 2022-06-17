@@ -80,6 +80,9 @@ i{
 }
 
 /* Project List */
+.card{
+    min-width: 20rem;
+}
 .card img{
     width: 100%;
     object-fit: cover;
@@ -99,6 +102,9 @@ div .row .row-cols-md-2 .row-cols-sm-1 .row-cols-lg-3{
 }
 
 @media (max-width: 992px){
+    .card{
+        max-width: 20rem;
+    }
     .container-fluid{
         height: 170vh;
     }

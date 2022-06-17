@@ -50,14 +50,15 @@ app.post("/add-project", function (req, res) {
 
     data = {
         title: data.titleProject,
-        startDate: data.startDateProject,
-        endDate: data.endDateProject,
+        startDate: getFullTime(new Date(data.startDateProject)),
+        endDate: getFullTime(new Date(data.endDateProject)),
         description: data.descriptionProject,
         nodeJs: data.checkNodeJS,
         reactJs: data.checkReactJS,
         angular: data.checkAngularJS,
         laravel: data.checkLaravel,
         image: data.imageProject,
+        duration: getDistanceTime(new Date(data.startDateProject), new Date(data.endDateProject)),
     };
 
     dataProject.push(data);
@@ -78,26 +79,79 @@ app.get("/contact", function (req, res) {
     res.render("contact");
 });
 
-// function getDistanceTime(startDate, endDate) {
-//     let start = new Date(startDate);
-//     let end = new Date(endDate);
+function getFullTime(waktu) {
+    let month = [
+        "Januari",
+        "Febuari",
+        "Maret",
+        "April",
+        "Mei",
+        "Juni",
+        "Juli",
+        "Agustus",
+        "September",
+        "Oktober",
+        "November",
+        "Desember",
+    ];
+    let date = [
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07",
+        "08",
+        "09",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18",
+        "19",
+        "20",
+        "21",
+        "22",
+        "23",
+        "24",
+        "25",
+        "26",
+        "27",
+        "28",
+        "29",
+        "30",
+        "31",
+    ];
 
-//     if (start > end) {
-//         alert("Error Your Date");
-//     } else if (start < end) {
-//         distance = new Date(end - start);
-//     }
+    let dateIndex = waktu.getDate();
+    let monthIndex = waktu.getMonth();
+    let year = waktu.getFullYear();
 
-//     let distanceDay = Math.floor(distance / (1000 * 3600 * 24));
-//     let distanceMonth = Math.floor(distanceDay / 31);
+    let fullTime = `${date[dateIndex]} ${month[monthIndex]} ${year}`;
+    return fullTime;
+}
 
-//     console.log(distanceDay);
+function getDistanceTime(startDate, endDate) {
+    let start = new Date(startDate);
+    let end = new Date(endDate);
+    let getTime = end - start
+    
+    let distanceDay = Math.floor(getTime / (1000 * 3600 * 24));
+    let distanceMonth = Math.floor(distanceDay / 31);
 
-//     duration =
-//         distanceMonth <= 0 ? distanceDay + " Hari" : distanceMonth + " Bulan";
+    duration = distanceMonth <= 0 ? distanceDay + " Hari" : distanceMonth + " Bulan";
 
-//     console.log(duration);
-// }
+    if (start > end) {
+        alert("Error Your Date");
+    } else if (start < end) {
+        return `${duration}`
+    }
+}
 
 app.listen(port, function (req, res) {
     console.log(`Server berjalan di port ${port}`);

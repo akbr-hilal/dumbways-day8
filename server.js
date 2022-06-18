@@ -17,7 +17,7 @@ let dataProject = [
         laravel: "fa-brands fa-laravel",
         duration: "3 Bulan",
         startDate: "12 Januari 2022",
-        endDate: "5 Februari 2022",
+        endDate: "05 Februari 2022",
     },
 ];
 
@@ -36,6 +36,40 @@ app.get("/del-project/:index", function (req, res) {
     let index = req.params.index;
     dataProject.splice(index, 1);
 
+    res.redirect("/");
+});
+
+app.get("/edit-project/:index", function (req, res) {
+    let index = req.params.index;
+    console.log(index);
+
+    let edit = dataProject[index];
+    console.log(edit);
+
+    res.render("edit-project", { edit });
+});
+;
+app.post("/edit-project/:index", function (req, res) {
+    let index = req.params.index;
+    let data = req.body;
+
+    data = {
+        title: data.titleProject,
+        startDate: getFullTime(new Date(data.startDateProject)),
+        endDate: getFullTime(new Date(data.endDateProject)),
+        description: data.descriptionProject,
+        nodeJs: data.checkNodeJS,
+        reactJs: data.checkReactJS,
+        angular: data.checkAngularJS,
+        laravel: data.checkLaravel,
+        image: data.imageProject,
+        duration: getDistanceTime(
+            new Date(data.startDateProject),
+            new Date(data.endDateProject)
+        ),
+    };
+
+    dataProject[index] = data
     res.redirect("/");
 });
 
@@ -58,7 +92,10 @@ app.post("/add-project", function (req, res) {
         angular: data.checkAngularJS,
         laravel: data.checkLaravel,
         image: data.imageProject,
-        duration: getDistanceTime(new Date(data.startDateProject), new Date(data.endDateProject)),
+        duration: getDistanceTime(
+            new Date(data.startDateProject),
+            new Date(data.endDateProject)
+        ),
     };
 
     dataProject.push(data);
@@ -139,17 +176,18 @@ function getFullTime(waktu) {
 function getDistanceTime(startDate, endDate) {
     let start = new Date(startDate);
     let end = new Date(endDate);
-    let getTime = end - start
-    
+    let getTime = end - start;
+
     let distanceDay = Math.floor(getTime / (1000 * 3600 * 24));
     let distanceMonth = Math.floor(distanceDay / 31);
 
-    duration = distanceMonth <= 0 ? distanceDay + " Hari" : distanceMonth + " Bulan";
+    duration =
+        distanceMonth <= 0 ? distanceDay + " Hari" : distanceMonth + " Bulan";
 
     if (start > end) {
         alert("Error Your Date");
     } else if (start < end) {
-        return `${duration}`
+        return `${duration}`;
     }
 }
 

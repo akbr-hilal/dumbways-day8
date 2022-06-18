@@ -1,6 +1,6 @@
-.container-fluid{
-    height: 100% !important;
-    width: 100% !important;
+.container-fluid .container-lg{
+    height:auto !important;
+    width:auto !important;
 }
 
 .detail-description p{

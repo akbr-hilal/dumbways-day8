@@ -46,12 +46,12 @@ app.get("/edit-project/:index", function (req, res) {
     let edit = dataProject[index];
     console.log(edit);
 
-    res.render("edit-project", { edit });
+    res.render("edit-project", {isLogin: isLogin, edit, id: index});
 });
 ;
 app.post("/edit-project/:index", function (req, res) {
-    let index = req.params.index;
     let data = req.body;
+    let index = req.params.index;
 
     data = {
         title: data.titleProject,
@@ -69,7 +69,7 @@ app.post("/edit-project/:index", function (req, res) {
         ),
     };
 
-    dataProject[index] = data
+    dataProject[index] = data;
     res.redirect("/");
 });
 

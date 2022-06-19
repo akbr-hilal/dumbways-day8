@@ -113,7 +113,7 @@
         >
             <div class="container-form">
                 <h2 class="fw-bold text-center">Edit My Project</h2>
-                <form action="/edit-project/{{@index}}" method="post">
+                <form action="/edit-project/{{id}}" method="post">
                     <div class="mb-2">
                         <label
                             for="exampleInputProject"
@@ -140,7 +140,7 @@
                                 class="form-control"
                                 id="inputStartDate"
                                 name="startDateProject"
-                                value="{{edit.startDate}}"
+                                value="{{edit.startDateProject}}"
                             />
                         </div>
                         <div class="col">
@@ -154,7 +154,7 @@
                                 class="form-control"
                                 id="inputEndDate"
                                 name="endDateProject"
-                                value="{{edit.endDate}}"
+                                value="{{edit.endDateProject}}"
                             />
                         </div>
                     </div>
@@ -187,6 +187,7 @@
                                     value="fa-brands fa-node-js"
                                     id="flexCheckNode"
                                     name="checkNodeJS"
+                                    {{#if edit.nodeJs}}checked{{/if}}
                                 />
                                 <label
                                     class="form-check-label"
@@ -202,6 +203,7 @@
                                     value="fa-brands fa-react"
                                     id="flexCheckReact"
                                     name="checkReactJS"
+                                    {{#if edit.reactJs}}checked{{/if}}
                                 />
                                 <label
                                     class="form-check-label"
@@ -219,6 +221,7 @@
                                     value="fa-brands fa-angular"
                                     id="flexCheckAngular"
                                     name="checkAngularJS"
+                                    {{#if edit.angular}}checked{{/if}}
                                 />
                                 <label
                                     class="form-check-label"
@@ -234,6 +237,7 @@
                                     value="fa-brands fa-laravel"
                                     id="flexCheckLaravel"
                                     name="checkLaravel"
+                                    {{#if edit.laravel}}checked{{/if}}
                                 />
                                 <label
                                     class="form-check-label"

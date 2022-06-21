@@ -113,7 +113,7 @@
         >
             <div class="container-form">
                 <h2 class="fw-bold text-center">Edit My Project</h2>
-                <form action="/edit-project/{{id}}" method="post">
+                <form action="/edit-project/{{name}}" method="post">
                     <div class="mb-2">
                         <label
                             for="exampleInputProject"
@@ -140,7 +140,7 @@
                                 class="form-control"
                                 id="inputStartDate"
                                 name="startDateProject"
-                                value="{{edit.startDateProject}}"
+                                value={{edit.startDate}}
                             />
                         </div>
                         <div class="col">
@@ -154,7 +154,7 @@
                                 class="form-control"
                                 id="inputEndDate"
                                 name="endDateProject"
-                                value="{{edit.endDateProject}}"
+                                value={{edit.endDate}}
                             />
                         </div>
                     </div>

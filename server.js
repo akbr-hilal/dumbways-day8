@@ -25,6 +25,8 @@ app.get("/", function (req, res) {
     let data = dataProject.map(function (items) {
         return {
             ...items,
+            start_Date: getFullTime(new Date(items.startDate)),
+            end_Date: getFullTime(new Date(items.endDate)),
             isLogin,
         };
     });
@@ -46,17 +48,16 @@ app.get("/edit-project/:index", function (req, res) {
     let edit = dataProject[index];
     console.log(edit);
 
-    res.render("edit-project", {isLogin: isLogin, edit, id: index});
+    res.render("edit-project", { isLogin: isLogin, edit, name: index });
 });
-;
 app.post("/edit-project/:index", function (req, res) {
     let data = req.body;
     let index = req.params.index;
 
     data = {
         title: data.titleProject,
-        startDate: getFullTime(new Date(data.startDateProject)),
-        endDate: getFullTime(new Date(data.endDateProject)),
+        startDate: data.startDateProject,
+        endDate: data.endDateProject,
         description: data.descriptionProject,
         nodeJs: data.checkNodeJS,
         reactJs: data.checkReactJS,
@@ -84,8 +85,8 @@ app.post("/add-project", function (req, res) {
 
     data = {
         title: data.titleProject,
-        startDate: getFullTime(new Date(data.startDateProject)),
-        endDate: getFullTime(new Date(data.endDateProject)),
+        startDate: data.startDateProject,
+        endDate: data.endDateProject,
         description: data.descriptionProject,
         nodeJs: data.checkNodeJS,
         reactJs: data.checkReactJS,
@@ -105,11 +106,11 @@ app.post("/add-project", function (req, res) {
 app.get("/project-detail/:index", function (req, res) {
     let index = req.params.index;
     console.log(index);
-
-    let project = dataProject[index];
-
+    let project = dataProject[index]
+    let startDate = getFullTime(new Date(dataProject[index].startDate))
+    let endDate = getFullTime(new Date(dataProject[index].endDate))
     console.log(project);
-    res.render("project-detail", project);
+    res.render("project-detail", {project: project, startDate, endDate });
 });
 
 app.get("/contact", function (req, res) {
